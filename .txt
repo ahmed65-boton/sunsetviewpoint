@@ -85,4 +85,237 @@
     }
   },
   "jdk.telemetry.enabled": true
+} 
+
+
+
+Love this question. Let’s go through it slowly and clearly, line by line, so you really understand what each part is doing.
+
+1. Targeting the spans inside #head
+#head span {
+    opacity: 0;
+    display: inline-block;
+    animation: fadeIn 0.7s forwards ease-in-out;
 }
+
+#head span
+
+#head = the element with id="head" (your <h1 id="head">…</h1>).
+
+span = all <span> tags inside that <h1>.
+
+So this rule applies to each word inside your heading, because each word is wrapped in a <span>.
+
+Example:
+
+<h1 id="head">
+  <span>Welcome</span> <span>to</span> <span>Sunset</span> ...
+</h1>
+
+opacity: 0;
+
+Opacity controls how transparent an element is.
+
+0 = fully invisible
+
+1 = fully visible
+
+So at the start, every <span> is completely INVISIBLE.
+
+We hide them first, and then the animation will make them fade in.
+
+display: inline-block;
+
+By default, <span> is display: inline;. Why change it?
+
+inline elements:
+
+Cannot use transform and some layout tricks nicely.
+
+Don’t accept width/height properly.
+
+inline-block:
+
+Behaves mostly like text (stays in a line).
+
+But you can apply transformations like translateY, scale, etc.
+
+We need inline-block so the animation (especially transform) works cleanly on each word.
+
+animation: fadeIn 0.7s forwards ease-in-out;
+
+This is a shorthand for several animation properties at once:
+
+fadeIn → the name of the animation (defined later with @keyframes fadeIn)
+
+0.7s → the duration (each word takes 0.7 seconds to animate)
+
+forwards → the fill-mode
+
+After the animation ends, the element keeps the final state
+
+Without this, it would fade in and then jump back to invisible (opacity 0).
+
+ease-in-out → the timing function
+
+Starts slow → speeds up → slows down at the end
+
+Makes the motion feel smooth and natural
+
+So for each <span>:
+
+“Run the fadeIn animation over 0.7 seconds, keep the final state, and move smoothly.”
+
+2. Defining the animation itself
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+
+@keyframes is where you define what happens during the animation.
+
+@keyframes fadeIn
+
+This defines an animation called fadeIn.
+
+It is referenced by name in the animation: fadeIn ... line.
+
+Inside it we have the animation stages:
+
+from { ... }
+
+from = 0% of the animation (the start)
+
+opacity: 0; → fully invisible
+
+transform: translateY(10px);
+
+Moves the element 10 pixels down from its normal position.
+
+Positive Y = down, negative Y = up.
+
+So at the start of the animation, each word is:
+
+Invisible and slightly lower than its final position.
+
+to { ... }
+
+to = 100% of the animation (the end)
+
+opacity: 1; → fully visible
+
+transform: translateY(0); → back to its original position (no shift)
+
+So over 0.7 seconds, each word:
+
+Fades from invisible → visible
+Moves from slightly down → normal position
+
+That’s why it feels like the word “rises” into place while fading in.
+
+3. Staggering the words with nth-child
+#head span:nth-child(1) { animation-delay: 0.2s; }
+#head span:nth-child(2) { animation-delay: 0.5s; }
+#head span:nth-child(3) { animation-delay: 0.8s; }
+#head span:nth-child(4) { animation-delay: 1.1s; }
+#head span:nth-child(5) { animation-delay: 1.4s; }
+
+#head span:nth-child(n)
+
+nth-child picks a specific child element number inside #head.
+
+nth-child(1) = the 1st child element
+
+nth-child(2) = the 2nd child element
+…and so on.
+
+In your <h1 id="head">, the children are:
+
+<span>Welcome </span>
+
+<span>to </span>
+
+<span>Sunset </span>
+
+<span>View </span>
+
+<span>Point </span>
+
+So each line targets a specific word.
+
+animation-delay: Xs;
+
+This tells when the animation should start for that element.
+
+0.2s → start after 0.2 seconds
+
+0.5s → start after 0.5 seconds
+
+0.8s → start after 0.8 seconds
+
+1.1s → start after 1.1 seconds
+
+1.4s → start after 1.4 seconds
+
+So the timeline looks like:
+
+Word	Starts At	Ends Around
+Welcome	0.2s	0.9s
+to	0.5s	1.2s
+Sunset	0.8s	1.5s
+View	1.1s	1.8s
+Point	1.4s	2.1s
+
+That’s why they appear one by one, instead of all at the same time.
+
+4. Putting it all together in plain English
+
+All spans start invisible and slightly lower than their final position.
+
+Each span has the same fadeIn animation assigned.
+
+The @keyframes fadeIn animation:
+
+Fades opacity from 0 → 1
+
+Moves the word from 10px down → normal position.
+
+Using nth-child and animation-delay, we tell:
+
+First word: start after 0.2s
+
+Second word: after 0.5s
+
+Third: after 0.8s
+
+etc.
+
+Because of the staggered delays, each word appears in sequence, not all at once.
+
+5. Full snippet again (for reference)
+#head span {
+    opacity: 0;
+    display: inline-block;
+    animation: fadeIn 0.7s forwards ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+#head span:nth-child(1) { animation-delay: 0.2s; }
+#head span:nth-child(2) { animation-delay: 0.5s; }
+#head span:nth-child(3) { animation-delay: 0.8s; }
+#head span:nth-child(4) { animation-delay: 1.1s; }
+#head span:nth-child(5) { animation-delay: 1.4s; }
+
+
+If you’d like next, I can show you:
+
+how to make letters appear one by one instead of words, or
+
+how to loop the animation, or
+
+how to make the last word glow or change color.

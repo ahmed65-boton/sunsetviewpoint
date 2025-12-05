@@ -1,12 +1,135 @@
-body {
-    background-color: whitesmoke;
-    text-align: center;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    align-items: center;
+:root {
+  --border: 2px solid #000;
+  --radius: 14px;
 }
 
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: whitesmoke;
+  color: #000;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+  text-align: center;
+}
+
+.container {
+  width: min(1000px, 92%);
+  margin: 0 auto;
+}
+
+/* Title */
+#head {
+  font-size: clamp(1.8rem, 4vw, 4rem);
+  font-weight: 900;
+  padding: 28px 0 16px;
+  margin: 0;
+  display: inline-block;
+}
+
+.bouncing-text-container span {
+  display: inline-block;
+  animation: bounce 0.9s ease-in-out 1;
+  will-change: transform;
+}
+
+.bouncing-text-container .space {
+  width: 0.55ch;
+  animation: none;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+
+/* Stagger delays */
+.bouncing-text-container span:nth-child(1)  { animation-delay: 0.05s; }
+.bouncing-text-container span:nth-child(2)  { animation-delay: 0.10s; }
+.bouncing-text-container span:nth-child(3)  { animation-delay: 0.15s; }
+.bouncing-text-container span:nth-child(4)  { animation-delay: 0.20s; }
+.bouncing-text-container span:nth-child(5)  { animation-delay: 0.25s; }
+.bouncing-text-container span:nth-child(6)  { animation-delay: 0.30s; }
+.bouncing-text-container span:nth-child(7)  { animation-delay: 0.35s; }
+.bouncing-text-container span:nth-child(8)  { animation-delay: 0.40s; }
+.bouncing-text-container span:nth-child(9)  { animation-delay: 0.45s; }
+.bouncing-text-container span:nth-child(10) { animation-delay: 0.50s; }
+.bouncing-text-container span:nth-child(11) { animation-delay: 0.55s; }
+.bouncing-text-container span:nth-child(12) { animation-delay: 0.60s; }
+.bouncing-text-container span:nth-child(13) { animation-delay: 0.65s; }
+.bouncing-text-container span:nth-child(14) { animation-delay: 0.70s; }
+.bouncing-text-container span:nth-child(15) { animation-delay: 0.75s; }
+.bouncing-text-container span:nth-child(16) { animation-delay: 0.80s; }
+.bouncing-text-container span:nth-child(17) { animation-delay: 0.85s; }
+.bouncing-text-container span:nth-child(18) { animation-delay: 0.90s; }
+.bouncing-text-container span:nth-child(19) { animation-delay: 0.95s; }
+.bouncing-text-container span:nth-child(20) { animation-delay: 1.00s; }
+.bouncing-text-container span:nth-child(21) { animation-delay: 1.05s; }
+.bouncing-text-container span:nth-child(22) { animation-delay: 1.10s; }
+.bouncing-text-container span:nth-child(23) { animation-delay: 1.15s; }
+.bouncing-text-container span:nth-child(24) { animation-delay: 1.20s; }
+.bouncing-text-container span:nth-child(25) { animation-delay: 1.25s; }
+.bouncing-text-container span:nth-child(26) { animation-delay: 1.30s; }
+.bouncing-text-container span:nth-child(27) { animation-delay: 1.35s; }
+.bouncing-text-container span:nth-child(28) { animation-delay: 1.40s; }
+
+/* Image */
 #image1 {
-    border: 5px solid black;
-    border-radius: 10px;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+  display: block;
+  margin: 16px auto 10px;
+  width: min(720px, 100%);
+  height: auto;
+  border: 5px solid #000;
+  border-radius: var(--radius);
+  box-shadow: 6px 6px 16px rgba(0,0,0,0.25);
+}
+
+/* Buttons */
+.actions { margin: 12px 0 18px; }
+
+button {
+  border: var(--border);
+  border-radius: 12px;
+  padding: 12px 18px;
+  background: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+button:active { transform: translateY(1px); }
+button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Email box */
+.mailbox {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 10px auto 40px;
+}
+
+#toEmail {
+  border: var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  width: min(360px, 100%);
+  font-size: 1rem;
+}
+
+#status {
+  width: 100%;
+  margin: 8px 0 0;
+  font-weight: 700;
+}
+
+/* Screen-reader only */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
 }

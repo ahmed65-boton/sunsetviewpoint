@@ -1,13 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunset View Point</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sunset View Point</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-    <h1>Welcome to Sunset View Point</h1>
-    <img src="assets/pic1.png" alt="hut on the hill" title="hut on the hill" width="600" height="400" id="image1">
+  <header class="container">
+    <h1 id="head" class="bouncing-text-container" aria-label="Special Edition Oppo Phone">
+      <span>S</span><span>p</span><span>e</span><span>c</span><span>i</span><span>a</span><span>l</span><span class="space">&nbsp;</span>
+      <span>E</span><span>d</span><span>i</span><span>t</span><span>i</span><span>o</span><span>n</span><span class="space">&nbsp;</span>
+      <span>O</span><span>p</span><span>p</span><span>o</span><span class="space">&nbsp;</span>
+      <span>P</span><span>h</span><span>o</span><span>n</span><span>e</span>
+    </h1>
+  </header>
+
+  <main class="container">
+    <img
+      src="assets/image.png"
+      alt="hut on the hill"
+      title="hut on the hill"
+      id="image1"
+    />
+
+    <div class="actions">
+      <button id="btn1" type="button">Buy Now</button>
+    </div>
+
+    <section class="mailbox" aria-label="Email me section">
+      <label class="sr-only" for="toEmail">Email address</label>
+      <input
+        id="toEmail"
+        type="email"
+        placeholder="Enter your email (e.g. name@gmail.com)"
+        autocomplete="email"
+        required
+      />
+      <button id="sendBtn" type="button">Send me an email</button>
+      <p id="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="view.js"></script>
 </body>
 </html>
